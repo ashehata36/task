@@ -62,7 +62,7 @@ class _CartViewState extends State<CartView> {
                       ),
                       child: GetBuilder<ProductsController>(
                         builder: (productsController) => Column(
-                          children: productsController.likesProducts.value.products
+                          children: productsController.productsInCart.value.products
                               .map(
                                 (e) => Padding(
                                   padding: const EdgeInsets.only(bottom: AppPadding.p25),

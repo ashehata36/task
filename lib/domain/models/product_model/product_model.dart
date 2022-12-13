@@ -10,6 +10,7 @@ class Product {
   String price;
   Color color;
   bool isLiked;
+  bool isInCart;
   int count;
   int iPrice;
 
@@ -25,6 +26,7 @@ class Product {
     required this.isLiked,
     required this.count,
     required this.iPrice,
+    required this.isInCart,
   });
 
   Product copyWith({
@@ -36,6 +38,7 @@ class Product {
     String? price,
     Color? color,
     bool? isLiked,
+    bool? isInCart,
     int? count,
     int? iPrice,
   }) =>
@@ -51,6 +54,7 @@ class Product {
         color: color ?? this.color,
         count: count ?? this.count,
         iPrice: iPrice ?? this.iPrice,
+        isInCart: isInCart ?? this.isInCart,
       );
 }
 
@@ -75,6 +79,7 @@ Products dummyProducts = Products(
       oldPrice: "\$ 18",
       color: const Color(0xfff9bdad),
       isLiked: false,
+      isInCart: false,
       count: 1,
     ),
     Product(
@@ -88,6 +93,7 @@ Products dummyProducts = Products(
       oldPrice: "\$ 30",
       color: const Color(0xfffad96d),
       isLiked: true,
+      isInCart: false,
       count: 1,
     ),
     Product(
@@ -101,6 +107,7 @@ Products dummyProducts = Products(
       oldPrice: "",
       color: const Color(0xffccb8ff),
       isLiked: false,
+      isInCart: false,
       count: 1,
     ),
     Product(
@@ -114,6 +121,7 @@ Products dummyProducts = Products(
       oldPrice: "\$ 35",
       color: const Color(0xffb0eafd),
       isLiked: false,
+      isInCart: true,
       count: 1,
     ),
     Product(
@@ -127,6 +135,7 @@ Products dummyProducts = Products(
       oldPrice: "\$ 14",
       color: const Color(0xffff9dc2),
       isLiked: false,
+      isInCart: true,
       count: 1,
     ),
   ],

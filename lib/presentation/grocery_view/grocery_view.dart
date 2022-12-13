@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:task1/data/controllers/products_controllers/products_controller.dart';
 import 'package:task1/domain/models/ad_model/ad_model.dart';
 import 'package:task1/domain/models/category_model/category_model.dart';
+import 'package:task1/presentation/widgets/grocery_deal_card.dart';
 import 'package:task1/presentation/widgets/location_card.dart';
 import 'package:task1/utilities/resources/color_manager.dart';
 import 'package:task1/utilities/resources/font_manager.dart';
@@ -200,108 +201,7 @@ class _GroceryViewState extends State<GroceryView> {
                           child: Row(
                             children: productsController.allProducts.value.products
                                 .map(
-                                  (e) => Padding(
-                                    padding: const EdgeInsets.only(right: AppPadding.p14),
-                                    child: IntrinsicHeight(
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () => productsController.likeProduct(
-                                              id: e.id,
-                                            ),
-                                            child: DecoratedBox(
-                                              decoration: BoxDecoration(
-                                                color: e.color,
-                                                borderRadius: BorderRadius.circular(AppSize.s14),
-                                              ),
-                                              position: DecorationPosition.background,
-                                              child: Stack(
-                                                alignment: Alignment.topLeft,
-                                                children: [
-                                                  const SizedBox(
-                                                    width: AppSize.s100,
-                                                    height: AppSize.s100,
-                                                  ),
-                                                  Container(
-                                                    padding: const EdgeInsets.all(AppPadding.p1),
-                                                    //margin: const EdgeInsets.all(AppMargin.m4),
-                                                    decoration: BoxDecoration(
-                                                      color: ColorManager.white,
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: Icon(
-                                                      e.isLiked ? Icons.favorite : Icons.favorite_border,
-                                                      size: AppSize.s18,
-                                                      color: e.isLiked ? ColorManager.primary : ColorManager.grey1,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(width: AppSize.s8),
-                                          Column(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                e.title,
-                                                style: Get.textTheme.titleMedium!.copyWith(
-                                                  fontSize: FontSize.s12,
-                                                ),
-                                              ),
-                                              Text(
-                                                "${e.unitOfQuantity} ${e.quantity}",
-                                                style: Get.textTheme.titleMedium!.copyWith(
-                                                  fontSize: FontSize.s10,
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Icon(
-                                                    Icons.location_on_outlined,
-                                                    size: AppSize.s18,
-                                                    color: ColorManager.grey,
-                                                  ),
-                                                  const SizedBox(width: AppSize.s4),
-                                                  Text(
-                                                    e.location,
-                                                    style: Get.textTheme.titleMedium!.copyWith(
-                                                      fontSize: FontSize.s10,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Text.rich(
-                                                TextSpan(
-                                                  children: [
-                                                    if (e.oldPrice.isNotEmpty)
-                                                      TextSpan(
-                                                        text: "${e.price}  ",
-                                                        style: Get.textTheme.titleLarge!.copyWith(
-                                                          fontSize: FontSize.s16,
-                                                          color: ColorManager.primary,
-                                                        ),
-                                                      ),
-                                                    TextSpan(
-                                                      text: e.oldPrice,
-                                                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                                            decoration: TextDecoration.lineThrough,
-                                                            fontSize: FontSize.s12,
-                                                          ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  (e) => GroceryDealCard(product: e),
                                 )
                                 .toList(),
                           ),

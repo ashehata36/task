@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -67,6 +65,7 @@ class _BottomBarViewState extends State<BottomBarView> {
               icon: SvgPicture.asset(
                 "assets/icons/flouting_svg.svg",
                 height: AppSize.s30,
+                width: AppSize.s22,
                 color: ColorManager.white,
               ),
               title: " ",

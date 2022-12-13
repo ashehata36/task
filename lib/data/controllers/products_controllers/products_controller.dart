@@ -10,6 +10,12 @@ class ProductsController extends GetxController {
         ),
       );
 
+  Rx<Products> get productsInCart => Rx<Products>(
+        Products(
+          products: allProducts.value.products.where((element) => element.isInCart).toList(),
+        ),
+      );
+
   likeProduct({required int id}) {
     for (int i = 0; i < allProducts.value.products.length; i++) {
       if (allProducts.value.products[i].id == id) {
@@ -23,13 +29,33 @@ class ProductsController extends GetxController {
   }
 
   minus({required int id}) {
-    allProducts.value.products.firstWhere((element) => element.id == id).count--;
-    allProducts.value.products.removeWhere((element) => element.count == 0);
+    for (int i = 0; i < allProducts.value.products.length; i++) {
+      if (allProducts.value.products[i].id == id && allProducts.value.products[i].count > 0) {
+        allProducts.value.products[i].count = allProducts.value.products[i].count - 1;
+      }
+    }
+    for (int i = 0; i < allProducts.value.products.length; i++) {
+      if (allProducts.value.products[i].count < 1) {
+        allProducts.value.products[i].isInCart = false;
+      }
+    }
     update();
   }
 
   plus({required int id}) {
     allProducts.value.products.firstWhere((element) => element.id == id).count++;
+    update();
+  }
+
+  addToCart({required Product product}) {
+    for (int i = 0; i < allProducts.value.products.length; i++) {
+      if (allProducts.value.products[i].id == product.id) {
+        allProducts.value.products[i] = allProducts.value.products[i].copyWith(
+          isInCart: true,
+          count: 1,
+        );
+      }
+    }
     update();
   }
 }
