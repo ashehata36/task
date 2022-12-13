@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:task1/domain/models/product_model/product_model.dart';
+import 'package:collection/collection.dart';
 
 class ProductsController extends GetxController {
   Rx<Products> allProducts = dummyProducts.obs;
@@ -15,6 +16,10 @@ class ProductsController extends GetxController {
           products: allProducts.value.products.where((element) => element.isInCart).toList(),
         ),
       );
+  RxInt get totalPrice {
+    int total = allProducts.value.products.map((e) => e.iPrice * e.count).toList().sum;
+   return total.obs;
+  }
 
   likeProduct({required int id}) {
     for (int i = 0; i < allProducts.value.products.length; i++) {
